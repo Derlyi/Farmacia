@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Droguería ServiPharma</title>
+    <style>
+        /* Estilos básicos para la página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Droguería ServiPharma</h1>
+        <input type="text" id="nombreProducto" placeholder="Ingrese el nombre del producto">
+        <button onclick="buscarProducto()">Buscar Producto</button>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function buscarProducto() {
+            var nombreProducto = document.getElementById("nombreProducto").value.toLowerCase();
+            var productos = {
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja la fiebre y alivia el dolor de cabeza, muscular, menstrual, de garganta, de muelas y de espalda."},
+                "acido acetilsalicilico": {"nombre": "Acido Acetilsalicílico", "precio": 5000, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Ayuda a lograr que haya mayor flujo de sangre a las piernas. Puede usarse para tratar un ataque cardíaco y prevenir coágulos de sangre cuando usted tenga un ritmo cardíaco anormal."},
+                "acyclovir": {"nombre": "Acyclovir", "precio": 2200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Reduce el dolor y acelerar la curación de las heridas o ampollas en las personas que tienen varicela, herpes zóster (culebrilla; una erupción cutánea que puede producirse en las personas que han tenido varicela), y en aquellas que tienen por primera vez o que vuelven a tener brotes del herpes genital"},
+                "amlodipino": {"nombre": "Amlodipino (Laproff)", "precio": 2200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Reduce la presión arterial al relajar los vasos sanguíneos para que el corazón no tenga que bombear tan fuerte. Controla el dolor de pecho aumentando el suministro de sangre al corazón."},
+                "amlodipino": {"nombre": "Amlodipino (Coaspharma)", "precio": 2200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Reduce la presión arterial al relajar los vasos sanguíneos para que el corazón no tenga que bombear tan fuerte. Controla el dolor de pecho aumentando el suministro de sangre al corazón."},
+                "albendazol": {"nombre": "Albendazol 200mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Se usa para el tratamiento de dos tipos de infecciones parasitarias, a saber, la neurocisticercosis y la hidatidosis."},
+                "amitriptilina clorhidrato": {"nombre": "Amitriptilina Clorhidrato 25mg", "precio": 2000, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Se usa para tratar la depresión y que se puede indicar para tratar la ansiedad, los trastornos del sueño y el dolor."},
+                "amoxicilina": {"nombre": "Amoxicilina 500mg", "precio": 4000, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Trata ciertas infecciones causadas por bacterias, como neumonía, bronquitis (infección de las vías respiratorias que van a los pulmones) e infecciones de los oídos, la nariz, la garganta, las vías urinarias y la piel."},
+                "ampicilina": {"nombre": "Ampicilina 500mg", "precio": 11000, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Trata determinadas infecciones que son ocasionadas por una bacteria como la meningitis (infección de las membranas que rodean el cerebro y la columna vertebral); e infecciones de la garganta, senos nasales, pulmones, órganos reproductivos, tracto urinario y tracto gastrointestinal."},
+                "azitromicina": {"nombre": "Azitromicina 500mg", "precio": 6800, "ubicacion": "Estante 1 - Sección 2", "descripcion": "Trata ciertas infecciones bacterianas, como la bronquitis, neumonía, enfermedades de transmisión sexual (ETS) e infecciones de los oídos, pulmones, senos nasales, piel, garganta y órganos reproductivos."},
+                "captopril": {"nombre": "Captopril 25mg", "precio": 2400, "ubicacion": "Estante 1 - Sección 2", "descripcion": "Controla los síntomas de la hipertensión y de la insuficiencia cardíaca, pero no las cura."},
+                "captopril": {"nombre": "Captopril 50mg", "precio": 3000, "ubicacion": "Estante 1 - Sección 2", "descripcion": "Controla los síntomas de la hipertensión y de la insuficiencia cardíaca, pero no las cura."},
+                "cefalexina": {"nombre": "Cefalexina 500mg (Laproff)", "precio": 9200, "ubicacion": "Estante 1 - Sección 2", "descripcion": "Trata algunas infecciones provocadas por bacterias como neumonía y otras infecciones del tracto respiratorio; e infecciones de los huesos, piel, oídos, , genitales, y del tracto urinario."},
+                "cefalexina": {"nombre": "Cefalexina 500mg (AG)", "precio": 8500, "ubicacion": "Estante 1 - Sección 2", "descripcion": "Trata algunas infecciones provocadas por bacterias como neumonía y otras infecciones del tracto respiratorio; e infecciones de los huesos, piel, oídos, , genitales, y del tracto urinario."},
+                "cefalexina": {"nombre": "Cefalexina 500mg (Recipe)", "precio": 9200, "ubicacion": "Estante 1 - Sección 2", "descripcion": "Trata algunas infecciones provocadas por bacterias como neumonía y otras infecciones del tracto respiratorio; e infecciones de los huesos, piel, oídos, , genitales, y del tracto urinario."},
+                "cefalexina": {"nombre": "Cefalexina 500mg (Phalae)", "precio": 8900, "ubicacion": "Estante 1 - Sección 2", "descripcion": "Trata algunas infecciones provocadas por bacterias como neumonía y otras infecciones del tracto respiratorio; e infecciones de los huesos, piel, oídos, , genitales, y del tracto urinario."},
+                "cefradina": {"nombre": "Cefradina 500mg", "precio": 8500, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Funciona eliminando las bacterias que provocan ciertas infecciones. Se usa para tratar algunas infecciones graves que son provocadas por bacterias, incluyendo infecciones de las vías urinarias, piel, oído y pulmones."},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+                "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja"},
+
+                // Añade más productos si lo deseas
+            };
+
+            var resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = "";
+
+            if (productos[nombreProducto]) {
+                var producto = productos[nombreProducto];
+                resultadoDiv.innerHTML += "<h2>Información del Producto</h2>";
+                resultadoDiv.innerHTML += "<p><strong>Nombre:</strong> " + producto.nombre + "</p>";
+                resultadoDiv.innerHTML += "<p><strong>Precio:</strong> $" + producto.precio + "</p>";
+                resultadoDiv.innerHTML += "<p><strong>Ubicación:</strong> " + producto.ubicacion + "</p>";
+                resultadoDiv.innerHTML += "<p><strong>Descripción:</strong> " + producto.descripcion + "</p>";
+            } else {
+                resultadoDiv.innerHTML = "<p>El producto no se encuentra en la farmacia.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
