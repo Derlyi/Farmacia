@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Droguería ServiPharma</title>
+
     <style>
         /* Estilos básicos para la página */
         body {
@@ -58,6 +58,7 @@
     <script>
         function buscarProducto() {
             var nombreProducto = document.getElementById("nombreProducto").value.toLowerCase();
+            
             var productos = {
                 "acetaminofen": {"nombre": "Acetaminofen 500mg", "precio": 1200, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Baja la fiebre y alivia el dolor de cabeza, muscular, menstrual, de garganta, de muelas y de espalda."},
                 "acido acetilsalicilico": {"nombre": "Acido Acetilsalicílico", "precio": 5000, "ubicacion": "Estante 1 - Sección 1", "descripcion": "Ayuda a lograr que haya mayor flujo de sangre a las piernas. Puede usarse para tratar un ataque cardíaco y prevenir coágulos de sangre cuando usted tenga un ritmo cardíaco anormal."},
@@ -611,9 +612,13 @@
                 resultadoDiv.innerHTML += "<p><strong>Ubicación:</strong> " + producto.ubicacion + "</p>";
                 resultadoDiv.innerHTML += "<p><strong>Descripción:</strong> " + producto.descripcion + "</p>";
             } else {
+                var apiUrl = "https://www.google.com/search?q=" + encodeURIComponent(nombreProducto) + "&hl=es";
+            // Abrir una nueva ventana del navegador con la búsqueda de Google
+            window.open(apiUrl, "_blank");
                 resultadoDiv.innerHTML = "<p>El producto no se encuentra en la farmacia.</p>";
             }
-        }
+            } 
+            
     </script>
 </body>
 </html>
